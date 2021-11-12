@@ -4,15 +4,13 @@ import shortid from 'shortid';
 
 import s from './ContactsFilter.module.css';
 
-import { getFilter } from '../../redux/contacts/contacts-selectors';
-import { changeFilter } from '../../redux/contacts/contacts-actions';
+import { changeFilter } from 'redux/contacts/contacts-actions';
 
 const filterId = shortid.generate();
 
 const ContactsFilter = () => {
-  const filter = useSelector(getFilter);
+  const filter = useSelector((state) => state.filter);
   const dispatch = useDispatch();
-
   const onChangeFilter = (e) => dispatch(changeFilter(e.target.value));
 
   return (

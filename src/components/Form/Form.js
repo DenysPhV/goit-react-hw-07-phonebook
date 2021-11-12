@@ -1,35 +1,34 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import shortid from 'shortid';
+import { useDispatch, useSelector } from 'react-redux';
 
+// import PropTypes from 'prop-types';
 import s from './Form.module.css';
+import { addContact } from 'redux/contacts/contacts-actions';
 
-import { getContacts } from '../../redux/contacts/contacts-selectors';
-import { addContacts } from '../../redux/contacts/contacts-operations';
+const initialState = {
+  name: '',
+  number: '',
+};
 
 function Form() {
-  const initialState = {
-    name: '',
-    number: '',
-  };
+  const [state, setState] = useState(initialState);
 
-  const [contact, setContact] = useState(initialState);
-
+  const contacts = useSelector((state) => state.contacts.items);
   const dispatch = useDispatch();
-  const onSubmit = (contact) => dispatch(addContacts(contact));
+  const onSubmit = (name, number) => dispatch(addContact(name, number));
 
   const nameId = shortid.generate();
   const numberId = shortid.generate();
-  const allContacts = useSelector((state) => getContacts(state));
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setContact((prev) => ({ ...prev, [name]: value }));
+    setState((prev) => ({ ...prev, [name]: value }));
   };
 
   const reset = () => {
-    setContact({ name: '', number: '' });
+    setState((prev) => ({ ...prev, name: '', number: '' }));
   };
 
   const addNoRepeatContact = (state, contacts) => {
@@ -54,10 +53,10 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    addNoRepeatContact(contact, allContacts);
+    addNoRepeatContact(state, contacts);
   };
 
-  const { name, number } = contact;
+  const { name, number } = state;
 
   return (
     <>
