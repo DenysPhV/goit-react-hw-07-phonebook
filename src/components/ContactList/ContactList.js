@@ -1,14 +1,16 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import {
   deleteContacts,
   fetchContacts,
-} from '../../redux/contacts/contacts-operations'; //'../../redux/phonebook/phonebook-operations';
-import { getVisibleContact } from '../../redux/contacts/contacts-selectors'; //'../../redux/phonebook/phonebook-selectors';
+} from '../../redux/contacts/contacts-operations';
 
-import st from './ContactList.module.css';
+import { getVisibleContact } from '../../redux/contacts/contacts-selectors';
 
-import ContactListItem from '../ContactListItem/ContactListItem';
+import s from './ContactList.module.css';
+
+import ContactListItem from '../ContactListItem';
 
 const ContactList = () => {
   const contacts = useSelector(getVisibleContact);
@@ -19,7 +21,7 @@ const ContactList = () => {
   }, [dispatch]);
 
   return (
-    <ul className={st.list}>
+    <ul className={s.list}>
       <ContactListItem
         contacts={contacts}
         deleteContact={(id) => dispatch(deleteContacts(id))}
@@ -29,56 +31,3 @@ const ContactList = () => {
 };
 
 export default ContactList;
-// =======================================================
-// import React from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-
-// import PropTypes from 'prop-types';
-// import s from './ContactList.module.css';
-
-// import { deleteContactRequest } from 'redux/contacts/contacts-actions';
-
-// const getVisibleContacts = (contacts, filter) => {
-//   const normalizedFilter = filter.toLowerCase().trim();
-
-//   return contacts.filter(
-//     (contact) =>
-//       contact.name.toLowerCase().includes(normalizedFilter) ||
-//       contact.number.includes(filter),
-//   );
-// };
-
-// const ContactList = () => {
-//   const contacts = useSelector(({ contacts: { items, filter } }) =>
-//     getVisibleContacts(items, filter),
-//   );
-//   const dispatch = useDispatch();
-
-//   return (
-//     <ul className={s.list}>
-//       {contacts.map(({ id, name, number }) => (
-//         <li key={id} className={s.item}>
-//           <span className={s.text}>{name}:</span>
-//           <span className={s.text}>{number}</span>
-
-//           <button
-//             onClick={() => {
-//               dispatch(deleteContactRequest(id));
-//             }}
-//             type="button"
-//             className={s.button}
-//           >
-//             Delete
-//           </button>
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// };
-
-// ContactList.propTypes = {
-//   // contacts: PropTypes.array,
-//   deleteContact: PropTypes.func,
-// };
-
-// export default ContactList;

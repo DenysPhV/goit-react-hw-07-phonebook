@@ -1,12 +1,11 @@
-//phonebook-reducer
 import { createReducer, combineReducers } from '@reduxjs/toolkit';
 
-import { filterContacts } from './contacts-actions'; // './phonebook-actions';
+import { filterContacts } from './contacts-actions';
 import {
   fetchContacts,
   deleteContacts,
   addContacts,
-} from './contacts-operations'; //'./phonebook-operations';
+} from './contacts-operations';
 
 const contactsReducer = createReducer([], {
   [addContacts.fulfilled]: (state, { payload }) => [...state, payload],
@@ -36,51 +35,3 @@ export default combineReducers({
   filter: filterReducer,
   loading,
 });
-
-//==========================================================
-// import { createReducer } from '@reduxjs/toolkit';
-// import { combineReducers } from 'redux';
-
-// // import contacts from 'data/contacts.json';
-// import { contactsApi } from './contacts-operation.jsx';
-// import {
-//   //add
-//   addContactRequest,
-//   addContactSuccess,
-//   addContactError,
-//   //delete
-//   deleteContactRequest,
-//   deleteContactSuccess,
-//   deleteContactError,
-//   //filter
-//   changeFilter,
-// } from './contacts-actions';
-
-// const contactReducer = createReducer([], {
-//   [contactsApi.fulfilled]: (_, action) => action.payload,
-//   [addContactSuccess]: (state, action) => [action.payload, ...state],
-//   [deleteContactSuccess]: (state, action) =>
-//     state.filter(({ id }) => id !== action.payload),
-// });
-
-// const filterReducer = createReducer('', {
-//   [changeFilter]: (_, action) => action.payload,
-// });
-
-// const loadingReducer = createReducer(false, {
-//   [contactsApi.pending]: () => true,
-//   [contactsApi.fulfilled]: () => false,
-//   [contactsApi.rejected]: () => false,
-//   [addContactRequest]: () => true,
-//   [addContactSuccess]: () => false,
-//   [addContactError]: () => false,
-//   [deleteContactRequest]: () => true,
-//   [deleteContactSuccess]: () => false,
-//   [deleteContactError]: () => false,
-// });
-
-// export default combineReducers({
-//   contactReducer,
-//   filterReducer,
-//   loadingReducer,
-// });

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-// import { v4 as uuidv4 } from 'uuid';
+
 import shortid from 'shortid';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getAllPhonebookContacts } from '../../redux/contacts/contacts-selectors'; //'../../redux/phonebook/phonebook-selectors';
-import { addContacts } from '../../redux/contacts/contacts-operations'; //'../../redux/phonebook/phonebook-operations';
+import { getContacts } from '../../redux/contacts/contacts-selectors';
+import { addContacts } from '../../redux/contacts/contacts-operations';
 
-import st from './Form.module.css';
+import s from './Form.module.css';
 
 const Form = () => {
   const initialState = {
@@ -17,9 +17,9 @@ const Form = () => {
   const dispatch = useDispatch();
   const onSubmit = (contact) => dispatch(addContacts(contact));
 
-  const idInputName = shortid.generate(); //uuidv4();
-  const idInputNumber = shortid.generate(); //uuidv4();
-  const allContacts = useSelector((state) => getAllPhonebookContacts(state));
+  const idInputName = shortid.generate();
+  const idInputNumber = shortid.generate();
+  const allContacts = useSelector((state) => getContacts(state));
 
   const reset = () => {
     setContact({ name: '', number: '' });
@@ -56,36 +56,36 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmitForm} className={st.form_contact}>
-      <label htmlFor={idInputName} className={st.label}>
+    <form onSubmit={handleSubmitForm} className={s.form}>
+      <label htmlFor={idInputName} className={s.label}>
         Name
         <input
           type="text"
           id={idInputName}
           onChange={handleChange}
           value={contact.name}
-          className={st.input}
+          className={s.input}
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
           required
         />
       </label>
-      <label htmlFor={idInputNumber} className={st.label}>
+      <label htmlFor={idInputNumber} className={s.label}>
         Number
         <input
           type="tel"
           id={idInputNumber}
           onChange={handleChange}
           value={contact.number}
-          className={st.input}
+          className={s.input}
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           required
         />
       </label>
-      <button type="submit" className={st.button}>
+      <button type="submit" className={s.button}>
         Add contact
       </button>
     </form>

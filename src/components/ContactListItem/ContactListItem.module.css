@@ -1,20 +1,40 @@
 .item {
-  width: 300px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+}
+
+.text {
+  width: 120px;
+  font-size: 15px;
+}
+
+.text:first-child {
+  font-weight: 500;
+}
+
+.text:nth-child(2) {
+  text-decoration: underline;
 }
 
 .button {
-  display: inline-block;
-  border: solid transparent;
-  border-radius: 4px;
-  background-color: rgb(228, 231, 252);
-  align-items: center;
-  text-align: center;
+  width: 130px;
+  margin-top: 10px;
+  padding: 5px;
+  margin-left: 2%;
+
+  font-size: 15px;
+
+  border: 1px solid #808080;
+  border-radius: 15px;
+  background-color: transparent;
+  backdrop-filter: blur(2px);
   cursor: pointer;
+
+  transition: box-shadow 250ms linear;
 }
 
-.button:hover {
-  background-color: rgb(252, 205, 245);
+.button:hover,
+.button:focus {
+  background-color: rgb(71, 88, 180);
+  color: #ffffff;
 }
