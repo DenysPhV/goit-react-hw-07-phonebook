@@ -9,7 +9,7 @@ export async function getContactsFromApi() {
 }
 //delete contact
 export async function deleteContactsFromApi(id) {
-  const { data } = await axios.delete(`/contacts/:${id}`);
+  const { data } = await axios.delete(`/contacts/${id}`);
   return data;
 }
 //add contact
