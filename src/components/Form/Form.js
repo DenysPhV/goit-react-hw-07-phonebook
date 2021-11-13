@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import shortid from 'shortid';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getContacts } from '../../redux/contacts/contacts-selectors';
@@ -11,18 +10,16 @@ import s from './Form.module.css';
 const Form = () => {
   const initialState = {
     name: '',
-    number: '',
+    phone: '',
   };
   const [contact, setContact] = useState(initialState);
   const dispatch = useDispatch();
   const onSubmit = (contact) => dispatch(addContacts(contact));
 
-  const idInputName = shortid.generate();
-  const idInputNumber = shortid.generate();
   const allContacts = useSelector((state) => getContacts(state));
 
   const reset = () => {
-    setContact({ name: '', number: '' });
+    setContact({ name: '', phone: '' });
   };
 
   const handleChange = (e) => {
@@ -31,7 +28,7 @@ const Form = () => {
   };
 
   const addNoRepeatContact = (cont, contacts) => {
-    const { name, number } = cont;
+    const { name, phone } = cont;
     if (
       contacts.some(
         (contacts) => contacts.name.toLowerCase() === name.toLowerCase(),
@@ -40,8 +37,8 @@ const Form = () => {
       alert(`${name} is already in contacts`);
       return;
     }
-    if (contacts.some((contacts) => contacts.number === number)) {
-      alert(`${number} is already in contacts`);
+    if (contacts.some((contacts) => contacts.number === phone)) {
+      alert(`${phone} is already in contacts`);
       return;
     }
 
@@ -57,11 +54,10 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmitForm} className={s.form}>
-      <label htmlFor={idInputName} className={s.label}>
+      <label className={s.label}>
         Name
         <input
           type="text"
-          id={idInputName}
           onChange={handleChange}
           value={contact.name}
           className={s.input}
@@ -71,15 +67,14 @@ const Form = () => {
           required
         />
       </label>
-      <label htmlFor={idInputNumber} className={s.label}>
-        Number
+      <label className={s.label}>
+        Phone Number
         <input
           type="tel"
-          id={idInputNumber}
           onChange={handleChange}
-          value={contact.number}
+          value={contact.phone}
           className={s.input}
-          name="number"
+          name="phone"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           required

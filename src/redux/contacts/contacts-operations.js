@@ -1,8 +1,8 @@
 //Обрабатываем запросы после сервиса
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import * as mockApi from '../../services/mockApi';
-
+import * as mockApi from 'services/mockApi';
+//add contact
 export const addContacts = createAsyncThunk(
   'contact/addContacts',
   async (contact) => {
@@ -10,7 +10,7 @@ export const addContacts = createAsyncThunk(
     return data;
   },
 );
-
+//delete contact
 export const deleteContacts = createAsyncThunk(
   'contact/deleteContacts',
   async (id) => {
@@ -18,7 +18,7 @@ export const deleteContacts = createAsyncThunk(
     return id;
   },
 );
-
+//get contacts api
 export const fetchContacts = createAsyncThunk(
   'contact/fetchContacts',
   async () => {
