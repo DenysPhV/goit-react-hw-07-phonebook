@@ -1,16 +1,41 @@
-import shortid from 'shortid';
+//phonebook-actions
 import { createAction } from '@reduxjs/toolkit';
 
-const addContact = createAction('contacts/add', ({ name, number }) => ({
-  payload: {
-    id: shortid.generate(),
-    name,
-    number,
-  },
-}));
+export const filterContacts = createAction('contact-filter');
 
-const deleteContact = createAction('contacts/delete');
+// ===============================================================
+// import shortid from 'shortid';
+// import { createAction } from '@reduxjs/toolkit';
 
-const changeFilter = createAction('contacts/changeFilter');
+// const addContactRequest = createAction(
+//   'contacts/add',
+//   ({ id, name, phone }) => ({
+//     payload: {
+//       // id: shortid.generate(),
+//       id,
+//       name,
+//       phone,
+//     },
+//   }),
+// );
+// const addContactSuccess = createAction('contacts/addContactSuccess');
+// const addContactError = createAction('contacts/addContactError');
 
-export { addContact, deleteContact, changeFilter };
+// const deleteContactRequest = createAction('contacts/deleteContactRequest');
+// const deleteContactSuccess = createAction('contacts/deleteContactSuccess');
+// const deleteContactError = createAction('contacts/deleteContactError');
+
+// const changeFilter = createAction('contacts/changeFilter');
+
+// export {
+//   // add
+//   addContactRequest,
+//   addContactSuccess,
+//   addContactError,
+//   //delete
+//   deleteContactRequest,
+//   deleteContactSuccess,
+//   deleteContactError,
+//   //filter
+//   changeFilter,
+// };
